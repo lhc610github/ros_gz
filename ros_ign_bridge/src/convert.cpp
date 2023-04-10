@@ -816,12 +816,15 @@ convert_ign_to_ros(
   ros_msg.is_bigendian = false;
   ros_msg.step = ros_msg.width * num_channels * octets_per_channel;
 
+  // ros::WallTime t1 = ros::WallTime::now();
   auto count = ros_msg.step * ros_msg.height;
   ros_msg.data.resize(ros_msg.step * ros_msg.height);
   std::copy(
     ign_msg.data().begin(),
     ign_msg.data().begin() + count,
     ros_msg.data.begin());
+
+  // std::cout << (ros::WallTime::now() - t1).toSec() << std::endl;
 }
 
 template<>
